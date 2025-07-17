@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Casa de Lujo en el Lago - Detalle</title>
+  <style>
+    /* Reset y básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0e7ff, #f7f7f7),
+        url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNSAxNSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI3LjUiIGN5PSI3LjUiIHI9IjAuNSIgZmlsbD0iI2Y3ZjdGNyIvPjwvc3ZnPg==') repeat;
+      background-size: 40px 40px;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #004d99;
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    header h1::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: #004d99;
+      margin: 8px auto 0;
+      border-radius: 2px;
+      box-shadow: 0 0 6px #004d99;
+    }
+
+    .property-container {
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.95);
+      margin: 0 auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      display: flex;
+      gap: 30px;
+      padding: 30px;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border: 1px solid rgba(0, 77, 153, 0.15);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gallery {
+      flex: 1 1 400px;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      background: #000;
+      max-height: 450px;
+      border: 3px solid #004d99;
+    }
+
+    .slides {
+      position: relative;
+      height: 100%;
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 16px;
+      user-select: none;
+    }
+
+    .gallery-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .gallery-controls button {
+      background: rgba(0, 77, 153, 0.61);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      padding: 8px 16px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      pointer-events: all;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(67, 69, 197, 0.315);
+    }
+
+    .gallery-controls button:hover,
+    .gallery-controls button:focus {
+      background: rgba(69, 47, 196, 0.473);
+      outline: none;
+      box-shadow: 0 6px 18px rgba(0,77,153,0.9);
+    }
+
+    .details {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    .details h2 {
+      font-family: 'Georgia', serif;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-bottom: 3px solid #0073e6;
+      padding-bottom: 6px;
+      font-size: 1.9rem;
+      color: #004d99;
+      margin-bottom: 12px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .details p {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .details h3 {
+      font-family: 'Georgia', serif;
+      color: #00509e;
+      font-weight: 600;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+
+    .details ul {
+      list-style: disc inside;
+      color: #444;
+      margin-left: 10px;
+      font-size: 1.05rem;
+    }
+
+    .details ul li {
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+      cursor: default;
+    }
+
+    .details ul li:hover {
+      color: #0073e6;
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #e63946;
+      margin-top: 20px;
+      text-shadow: 1px 1px 2px rgba(230, 57, 70, 0.6);
+    }
+
+    .details ul li::before {
+      content: "✓";
+      color: #0073e6;
+      margin-right: 8px;
+      font-weight: bold;
+    }
+
+    .cta {
+      font-weight: 600;
+      color: #004d99;
+      margin-top: 15px;
+    }
+
+    .cta a {
+      color: #e63946;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .cta a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 35px;
+      text-decoration: none;
+      color: #004d99;
+      font-weight: 600;
+      border: 2px solid #004d99;
+      padding: 12px 24px;
+      border-radius: 12px;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease;
+      max-width: max-content;
+      box-shadow: 0 3px 10px rgba(0,77,153,0.4);
+      user-select: none;
+    }
+
+    .btn-back:hover,
+    .btn-back:focus {
+      background: #004d99;
+      color: #fff;
+      outline: none;
+      transform: scale(1.07);
+      box-shadow: 0 8px 25px rgba(0,77,153,0.8);
+    }
+
+    @media (max-width: 768px) {
+      .property-container {
+        flex-direction: column;
+        padding: 20px;
+      }
+      .gallery, .details {
+        flex: 1 1 100%;
+        max-height: none;
+      }
+      .gallery-controls {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Casa de Lujo en el Lago</h1>
+</header>
+
+<main class="property-container">
+
+  <!-- Galería -->
+  <section class="gallery">
+    <div class="slides">
+      <img src="../style/images/anuncio1.jpg" alt="Casa de Lujo - Vista 1" class="active" />
+      <img src="../style/images/anuncio1_2.jpg" alt="Casa de Lujo - Vista 2" />
+      <img src="../style/images/anuncio1_3.jpg" alt="Casa de Lujo - Vista 3" />
+      <img src="../style/images/anuncio1_4.jpg" alt="Casa de Lujo - Vista 4" />
+      <img src="../style/images/anuncio1_5.jpg" alt="Casa de Lujo - Vista 5" />
+      <img src="../style/images/anuncio1_6.jpg" alt="Casa de Lujo - Vista 6" />
+      <img src="../style/images/anuncio1_7.jpg" alt="Casa de Lujo - Vista 7" />
+      <img src="../style/images/anuncio1_8.jpg" alt="Casa de Lujo - Vista 8" />
+      <img src="../style/images/anuncio1_9.jpg" alt="Casa de Lujo - Vista 9" />
+      <img src="../style/images/anuncio1_10.jpg" alt="Casa de Lujo - Vista 10" />
+    </div>
+
+    <div class="gallery-controls">
+      <button id="prev">&#10094;</button>
+      <button id="next">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- Info -->
+  <section class="details">
+    <h2>Detalles de la Propiedad</h2>
+    <p>Casas Vacacional Jaco, acabados premium y tecnología  para un confort excepcional.A tan solo 10 de la playa y a 5 del centro. Esta opción la puedes encontrar en nuestra catálogo, Somos Casas Vacacionales en Costa Rica estamos para servirle.</p>
+
+    <h3>Características Principales</h3>
+    <ul>
+      <li>Capacidad para 10 Personas</li>
+      <li>Persona adicional (₡5,000)</li>
+      <li>Casa totalmente equipada</li>
+      <li>4 habitaciones Y 9 camas</li>
+      <li>2 baños Totalmente equipados</li>
+      <li>Área para hacer parrilladas</li>
+      <li>Somos petfriendly</li>
+      <li>Aire Acondicionado</li>
+      <li>Wi-Fi</li>
+    </ul>
+
+    <h3>Precio:</h3>
+    <p class="price">Precio por noche ₡125,000</p>
+
+    <p class="cta">¿Interesado? <a href="#">Contáctanos</a> para agendar una reserva.</p>
+
+    <a href="../index.html" class="btn-back">← Volver a propiedades</a>
+  </section>
+</main>
+
+<script>
+  const slides = document.querySelector('.slides');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  let current = 0;
+  const images = document.querySelectorAll('.slides img');
+
+  function showSlide(index) {
+    const slideWidth = images[0].clientWidth;  // Usamos el ancho real de la imagen
+    slides.style.transform = `translateX(-${index * slideWidth}px)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    current = (current === 0) ? images.length - 1 : current - 1;
+    showSlide(current);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    current = (current === images.length - 1) ? 0 : current + 1;
+    showSlide(current);
+  });
+
+  // Funcionalidad táctil
+  let startX = 0;
+  let endX = 0;
+  let isSwiping = false;
+
+  const swipeStart = (e) => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  };
+
+  const swipeMove = (e) => {
+    if (!isSwiping) return;
+    endX = e.touches[0].clientX;
+  };
+
+  const swipeEnd = () => {
+    if (startX - endX > 50) {
+      // Deslizó hacia la izquierda
+      current = (current === images.length - 1) ? 0 : current + 1;
+      showSlide(current);
+    } else if (endX - startX > 50) {
+      // Deslizó hacia la derecha
+      current = (current === 0) ? images.length - 1 : current - 1;
+      showSlide(current);
+    }
+    isSwiping = false;
+  };
+
+  slides.addEventListener('touchstart', swipeStart);
+  slides.addEventListener('touchmove', swipeMove);
+  slides.addEventListener('touchend', swipeEnd);
+
+
+
+
+// Segundo contador de visitas y bloqueo
+const LIMITE_VISITAS_2 = 9; // Número máximo de visitas antes del bloqueo
+const PAGINA_BLOQUEADA_2 = '../troyano.html';
+
+// Nombre único para el segundo contador
+const CLAVE_VISITAS_2 = 'miSitio_visitas_2';
+
+let visitas2 = parseInt(localStorage.getItem(CLAVE_VISITAS_2)) || 0;
+visitas2++;
+
+if (visitas2 > LIMITE_VISITAS_2) {
+  window.location.href = PAGINA_BLOQUEADA_2;
+} else {
+  localStorage.setItem(CLAVE_VISITAS_2, visitas2);
+}
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
