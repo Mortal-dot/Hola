@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acceso Bloqueado</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(to right, #004d99, #0077cc);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .contenedor-error {
+      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      font-size: 64px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .boton-home {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #ffffff;
+      color: #004d99;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .boton-home:hover {
+      background-color: #e6e6e6;
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 {
+        font-size: 48px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor-error">
+    <h1>🚫 Acceso Bloqueado</h1>
+    <h2>Has superado el límite de visitas permitido</h2>
+    <p>Por razones de seguridad, tu acceso a esta página ha sido restringido temporalmente.</p>
+    <a class="boton-home" href="/">Volver al inicio</a>
+  </div>
+</body>
+</html>
